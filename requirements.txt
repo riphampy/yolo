@@ -4,3 +4,4 @@ numpy>=1.24.0
 ultralytics>=8.0.20
 Pillow>=9.5.0
 pandas>=2.0.0
+onnxruntime>=1.18.0
