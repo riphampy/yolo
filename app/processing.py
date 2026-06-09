@@ -130,6 +130,18 @@ def _render_video_stats(total, helmet, no_helmet, safety_rate, frames, fps):
 
 # ======================== WEBCAM REAL-TIME ========================
 
+def _find_camera() -> cv2.VideoCapture | None:
+    """Thử lần lượt index 0-3 để tìm camera khả dụng."""
+    for idx in range(4):
+        cap = cv2.VideoCapture(idx, cv2.CAP_DSHOW)  # CAP_DSHOW ổn định hơn trên Windows
+        if cap.isOpened():
+            ret, _ = cap.read()
+            if ret:
+                return cap
+        cap.release()
+    return None
+
+
 def stream_webcam(model, conf_thresh: float, iou_thresh: float,
                   alert_threshold: float = 50.0):
     """
@@ -137,8 +149,8 @@ def stream_webcam(model, conf_thresh: float, iou_thresh: float,
     Hiển thị cảnh báo khi tỷ lệ không đội mũ vượt alert_threshold (%).
     Dừng khi người dùng nhấn nút Stop.
     """
-    cap = cv2.VideoCapture(0)
-    if not cap.isOpened():
+    cap = _find_camera()
+    if cap is None:
         st.error("❌ Không tìm thấy webcam. Hãy kiểm tra kết nối thiết bị.")
         return
 
