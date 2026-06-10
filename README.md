@@ -1,2 +1,2 @@
 # yolo
-Nhận dạng không đôi mũ bảo hiểm bằng YOLO
+Nhận dạng không đội mũ bảo hiểm bằng YOLO
