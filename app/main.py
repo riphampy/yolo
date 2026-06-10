@@ -9,7 +9,6 @@ from datetime import datetime
 
 import numpy as np
 import streamlit as st
-import torch
 
 # ── Internal modules (không định nghĩa lại ở đây) ──────────────────────────
 from load_model import load_model
@@ -47,10 +46,7 @@ with st.sidebar:
         5,
         help="Chỉ áp dụng cho chế độ webcam real-time",
     )
-    device = "🟢 GPU (CUDA)" if torch.cuda.is_available() else "🔵 CPU"
-st.sidebar.markdown(f"**Thiết bị:** {device}")
-if torch.cuda.is_available():
-    st.sidebar.caption(torch.cuda.get_device_name(0))
+
     st.markdown("---")
     st.markdown("""
     ### ℹ️ Chú thích
